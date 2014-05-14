@@ -6,20 +6,22 @@ class SimpleHash
 
   def initialize(size)
     @size = size
-    @store = Array.new(5, [])
+    @store = Array.new(size, [])
   end
 
   def [](key)
-    5
+    store_key = key % @size
+    if @store[store_key].empty?
+      return nil
+    else
+      find_key(key, @store[store_key])
+    end
   end
 
   def []=(key, value)
-    puts 5
-    5
+    @store[store_key] << [key, value]
   end
 end
 
 hash = SimpleHash.new(50)
-assert_equal(5, hash[5])
-assert_equal(5, hash[3] = 7)
-assert_equal(5, hash.[]=(3, 7))
+assert_equal(nil, hash[5])
