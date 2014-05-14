@@ -12,6 +12,10 @@ def assert_equal(expected, test)
   if expected == test
     puts "Test passed!".green
   else
+    if expected.nil?
+      expected = 'nil'
+    end
+    
     puts "Failed! Expected #{expected} but got #{test}".red
   end
 end
