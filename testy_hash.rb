@@ -32,11 +32,18 @@ class SimpleHash
 
   def []=(key, value)
     store_key = key % @size
-    @store[store_key] << [key, value]
+    index = find_key(key, @store[store_key])
+    if index
+      @store[store_key][index][1] = value
+    else
+      @store[store_key] << [key, value]
+    end
   end
 end
 
 hash = SimpleHash.new(50)
-hash[3] = 5
 assert_equal(nil, hash[5])
+hash[3] = 5
 assert_equal(5, hash[3])
+hash[3] = 7
+assert_equal(7, hash[3])
