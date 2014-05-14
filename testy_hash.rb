@@ -10,8 +10,8 @@ class SimpleHash
   end
 
   def find_key(key, arr)
-    arr.each do |k, v|
-      return v if k == key
+    arr.each_with_index do |cell, index|
+      return index if cell[0] == key
     end
     return nil
   end
@@ -21,7 +21,12 @@ class SimpleHash
     if @store[store_key].empty?
       return nil
     else
-      return find_key(key, @store[store_key])
+      index = find_key(key, @store[store_key])
+      if index
+        return @store[store_key][index][1]
+      else
+        return nil
+      end
     end
   end
 
